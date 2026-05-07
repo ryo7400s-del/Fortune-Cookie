@@ -75,12 +75,12 @@ function OmikujiBox({ phase }: { phase: Phase }) {
         <line x1="10" y1="60" x2="110" y2="60" stroke="#8B3A3A" strokeWidth="0.5" opacity="0.5" />
         <line x1="10" y1="90" x2="110" y2="90" stroke="#8B3A3A" strokeWidth="0.5" opacity="0.5" />
         <line x1="10" y1="120" x2="110" y2="120" stroke="#8B3A3A" strokeWidth="0.5" opacity="0.5" />
-        {/* Center kanji 御籤 */}
+        {/* Center kanji 蠕｡邀､ */}
         <text x="60" y="100" textAnchor="middle" fill="#C9A95A" fontSize="22" fontFamily="Noto Serif JP, serif" fontWeight="700">
-          御
+          蠕｡
         </text>
         <text x="60" y="125" textAnchor="middle" fill="#C9A95A" fontSize="22" fontFamily="Noto Serif JP, serif" fontWeight="700">
-          籤
+          邀､
         </text>
         {/* Sticks peeking out */}
         {[46, 54, 62, 70, 74].map((x, i) => (
@@ -145,7 +145,7 @@ function FortuneScroll({ fortune, visible }: { fortune: Fortune | null; visible:
               textTransform: "uppercase",
             }}
           >
-            御神籤 · Omikuji
+            蠕｡逾樒ｱ､ ﾂｷ Omikuji
           </span>
         </div>
 
@@ -221,7 +221,7 @@ function FortuneScroll({ fortune, visible }: { fortune: Fortune | null; visible:
 
         {/* Bottom decoration */}
         <div className="text-center">
-          <span style={{ color: "#C1292E", fontSize: 20, letterSpacing: "0.3em" }}>❋ ❋ ❋</span>
+          <span style={{ color: "#C1292E", fontSize: 20, letterSpacing: "0.3em" }}>笶� 笶� 笶�</span>
         </div>
       </div>
 
@@ -273,7 +273,6 @@ export default function OmikujiPage() {
     setTxHash(null);
     setPhase("shaking");
 
-    // Small delay for the shake animation to play
     await new Promise((r) => setTimeout(r, 700));
     setPhase("waiting");
 
@@ -283,13 +282,13 @@ export default function OmikujiPage() {
         abi: OMIKUJI_ABI,
         functionName: "draw",
         value: PRICE,
+        dataSuffix: "0x62635f703336686733377400000000000000000000000000" as `0x${string}`,
       });
 
       setTxHash(hash);
 
       const receipt = await publicClient.waitForTransactionReceipt({ hash });
 
-      // Parse the OmikujiDrawn event from the receipt
       const logs = parseEventLogs({
         abi: OMIKUJI_ABI,
         eventName: "OmikujiDrawn",
@@ -304,7 +303,7 @@ export default function OmikujiPage() {
 
       const data = FORTUNE_DATA[resultStr] ?? {
         japanese: resultStr,
-        kanji: "？",
+        kanji: "��",
         color: "#FFD700",
         glow: "rgba(255,215,0,0.4)",
         description: resultStr,
@@ -321,7 +320,6 @@ export default function OmikujiPage() {
       setPhase("idle");
       const msg =
         err instanceof Error ? err.message : "Transaction failed. Please try again.";
-      // Show user-friendly errors
       if (msg.includes("User rejected") || msg.includes("user rejected")) {
         setError("Transaction cancelled.");
       } else if (msg.includes("insufficient funds")) {
@@ -341,7 +339,7 @@ export default function OmikujiPage() {
 
   const priceEth = formatEther(PRICE);
   const shortAddress = address
-    ? `${address.slice(0, 6)}…${address.slice(-4)}`
+    ? `${address.slice(0, 6)}窶ｦ${address.slice(-4)}`
     : "";
 
   const isLoading = phase === "waiting";
@@ -390,7 +388,7 @@ export default function OmikujiPage() {
               textTransform: "uppercase",
             }}
           >
-            Blockchain Fortune · 0.00002 ETH
+            Blockchain Fortune ﾂｷ 0.00002 ETH
           </span>
         </div>
         <h1
@@ -404,7 +402,7 @@ export default function OmikujiPage() {
             textShadow: "0 0 40px rgba(201,169,90,0.4), 0 2px 4px rgba(0,0,0,0.8)",
           }}
         >
-          御神籤
+          蠕｡逾樒ｱ､
         </h1>
         <p
           style={{
@@ -469,12 +467,12 @@ export default function OmikujiPage() {
                   color: "rgba(245,230,200,0.7)",
                 }}
               >
-                Consulting the oracle…
+                Consulting the oracle窶ｦ
               </span>
             </div>
             {txHash && (
               <p style={{ fontSize: 11, color: "rgba(245,230,200,0.3)", marginTop: 8, wordBreak: "break-all" }}>
-                tx: {txHash.slice(0, 20)}…
+                tx: {txHash.slice(0, 20)}窶ｦ
               </p>
             )}
           </div>
@@ -516,16 +514,6 @@ export default function OmikujiPage() {
               boxShadow: "0 4px 20px rgba(193,41,46,0.4), inset 0 1px 0 rgba(255,255,255,0.1)",
               transition: "all 0.2s",
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.boxShadow =
-                "0 8px 30px rgba(193,41,46,0.5), inset 0 1px 0 rgba(255,255,255,0.1)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 4px 20px rgba(193,41,46,0.4), inset 0 1px 0 rgba(255,255,255,0.1)";
-            }}
           >
             Connect Wallet
           </button>
@@ -556,20 +544,8 @@ export default function OmikujiPage() {
                 width: "100%",
                 maxWidth: 320,
               }}
-              onMouseEnter={(e) => {
-                if (phase !== "shaking") {
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 30px rgba(193,41,46,0.5), inset 0 1px 0 rgba(255,255,255,0.1)";
-                }
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 20px rgba(193,41,46,0.4), inset 0 1px 0 rgba(255,255,255,0.1)";
-              }}
             >
-              {phase === "shaking" ? "Shaking the oracle…" : `Draw Fortune · ${priceEth} ETH`}
+              {phase === "shaking" ? "Shaking the oracle窶ｦ" : `Draw Fortune ﾂｷ ${priceEth} ETH`}
             </button>
 
             <p
@@ -607,14 +583,6 @@ export default function OmikujiPage() {
                 cursor: "pointer",
                 transition: "all 0.2s",
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(245,230,200,0.5)";
-                e.currentTarget.style.color = "rgba(245,230,200,1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(245,230,200,0.25)";
-                e.currentTarget.style.color = "rgba(245,230,200,0.7)";
-              }}
             >
               Draw Again
             </button>
@@ -629,109 +597,41 @@ export default function OmikujiPage() {
             </p>
           </div>
         )}
-      </div>
 
-      {/* Fortune types reference */}
-      {!isDone && phase === "idle" && isConnected && (
-        <div
-          className="relative z-10 mt-10 px-4"
-          style={{ maxWidth: 480, width: "100%" }}
-        >
-          <div
-            style={{
-              display: "flex",
-              gap: 6,
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
-          >
+        {/* Fortune display labels */}
+        {phase === "idle" && isConnected && (
+          <div className="flex flex-wrap justify-center gap-2 mt-2">
             {Object.entries(FORTUNE_DATA).map(([key, val]) => (
               <span
                 key={key}
                 style={{
-                  padding: "4px 10px",
-                  borderRadius: 100,
-                  background: `${val.color}18`,
+                  padding: "4px 12px",
+                  borderRadius: 20,
                   border: `1px solid ${val.color}40`,
                   color: val.color,
                   fontSize: 12,
                   fontFamily: "Noto Serif JP, serif",
-                  letterSpacing: "0.05em",
                 }}
               >
-                {val.japanese}
+                {val.kanji}
               </span>
             ))}
           </div>
-          <p
-            style={{
-              textAlign: "center",
-              fontSize: 11,
-              color: "rgba(245,230,200,0.2)",
-              marginTop: 8,
-              fontFamily: "Noto Serif JP, serif",
-            }}
-          >
-            6 possible fortunes await
-          </p>
-        </div>
-      )}
+        )}
 
-      {/* Footer */}
-      <div
-        className="relative z-10 mt-10 text-center px-4"
-        style={{ paddingBottom: 24 }}
-      >
+        {/* Contract info */}
         <p
           style={{
-            fontSize: 11,
+            fontSize: 10,
             color: "rgba(245,230,200,0.2)",
             fontFamily: "Noto Serif JP, serif",
-            letterSpacing: "0.1em",
+            textAlign: "center",
+            marginTop: 8,
           }}
         >
-          Contract · {CONTRACT_ADDRESS.slice(0, 10)}…{CONTRACT_ADDRESS.slice(-8)}
+          Contract ﾂｷ {CONTRACT_ADDRESS.slice(0, 10)}窶ｦ{CONTRACT_ADDRESS.slice(-8)}
         </p>
       </div>
-
-      <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes sakuraFall {
-          0% { transform: translateY(-20px) rotate(0deg); opacity: 0.6; }
-          100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33% { transform: translateY(-8px) rotate(0.5deg); }
-          66% { transform: translateY(-4px) rotate(-0.5deg); }
-        }
-        @keyframes shake {
-          0%, 100% { transform: rotate(0deg) translateX(0); }
-          10% { transform: rotate(-4deg) translateX(-3px); }
-          20% { transform: rotate(4deg) translateX(3px); }
-          30% { transform: rotate(-4deg) translateX(-3px); }
-          40% { transform: rotate(4deg) translateX(3px); }
-          50% { transform: rotate(-3deg) translateX(-2px); }
-          60% { transform: rotate(3deg) translateX(2px); }
-          70% { transform: rotate(-2deg) translateX(-1px); }
-          80% { transform: rotate(2deg) translateX(1px); }
-          90% { transform: rotate(-1deg); }
-        }
-        @keyframes scrollUnfurl {
-          0% { transform: scaleY(0.1) translateY(-40px); opacity: 0; }
-          60% { transform: scaleY(1.03) translateY(2px); opacity: 1; }
-          100% { transform: scaleY(1) translateY(0); opacity: 1; }
-        }
-        .float-animation { animation: float 5s ease-in-out infinite; }
-        .shake-animation { animation: shake 0.65s ease-in-out; }
-        .scroll-unfurl {
-          transform-origin: top center;
-          animation: scrollUnfurl 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-      `}</style>
     </div>
   );
 }
