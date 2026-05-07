@@ -1,0 +1,14 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "frame": {
+    "version": "1",
+    "name": "おみくじ",
+    "iconUrl": "https://fortune-cookie-omikuji.vercel.app/favicon.svg",
+    "homeUrl": "https://fortune-cookie-omikuji.vercel.app",
+    "splashBackgroundColor": "#ffffff"
+  }
+}
