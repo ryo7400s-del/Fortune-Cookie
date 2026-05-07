@@ -513,7 +513,7 @@ export default function OmikujiPage() {
                 maxWidth: 320,
               }}
             >
-              {phase === "shaking" ? "Shaking the oracle窶ｦ" : `Draw Fortune ﾂｷ ${priceEth} ETH`}
+              {phase === "shaking" ? "Shaking the oracle窶ｦ" : `Draw Fortune  ${priceEth} ETH`}
             </button>
 
             <p
