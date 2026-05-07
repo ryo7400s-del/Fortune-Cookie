@@ -282,7 +282,7 @@ export default function OmikujiPage() {
         abi: OMIKUJI_ABI,
         functionName: "draw",
         value: PRICE,
-        dataSuffix: "0x62635f703336686733377400000000000000000000000000" as `0x${string}`,
+        dataSuffix: "0x62635f70333668673337740000000000" as `0x${string}`,
       });
 
       setTxHash(hash);
@@ -634,4 +634,4 @@ export default function OmikujiPage() {
       </div>
     </div>
   );
-}
+      }
