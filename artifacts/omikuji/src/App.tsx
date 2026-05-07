@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { mainnet, sepolia, base, polygon, optimism, arbitrum } from "wagmi/chains";
 import { injected } from "wagmi/connectors";
+import { farcasterMiniApp } from "@farcaster/miniapp-wagmi-connector";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
@@ -12,7 +13,7 @@ import OmikujiPage from "@/pages/OmikujiPage";
 
 const wagmiConfig = createConfig({
   chains: [mainnet, sepolia, base, polygon, optimism, arbitrum],
-  connectors: [injected()],
+  connectors: [farcasterMiniApp(), injected()],
   transports: {
     [mainnet.id]: http(),
     [sepolia.id]: http(),
