@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { sdk } from "@farcaster/miniapp-sdk";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider, createConfig, http } from "wagmi";
@@ -33,6 +35,10 @@ function Router() {
 }
 
 function App() {
+  useEffect(() => {
+    sdk.actions.ready();
+  }, []);
+
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
