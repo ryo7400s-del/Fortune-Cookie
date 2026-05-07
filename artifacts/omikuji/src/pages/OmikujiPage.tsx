@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
   useAccount,
   useConnect,
@@ -10,6 +10,7 @@ import {
 } from "wagmi";
 import { parseEventLogs, formatEther } from "viem";
 import { injected } from "wagmi/connectors";
+import { Attribution } from "ox/erc8021";
 import {
   CONTRACT_ADDRESS,
   OMIKUJI_ABI,
@@ -65,24 +66,18 @@ function OmikujiBox({ phase }: { phase: Phase }) {
       style={{ width: 120, height: 160 }}
     >
       <svg width="120" height="160" viewBox="0 0 120 160" fill="none">
-        {/* Box body */}
         <rect x="10" y="30" width="100" height="120" rx="8" fill="#2D1B4E" stroke="#8B3A3A" strokeWidth="2" />
-        {/* Top lid */}
         <rect x="5" y="18" width="110" height="20" rx="6" fill="#3D1F5E" stroke="#C1292E" strokeWidth="2" />
-        {/* Hole for sticks */}
         <ellipse cx="60" cy="18" rx="18" ry="7" fill="#1A0F2E" stroke="#8B3A3A" strokeWidth="1.5" />
-        {/* Decorative lines */}
         <line x1="10" y1="60" x2="110" y2="60" stroke="#8B3A3A" strokeWidth="0.5" opacity="0.5" />
         <line x1="10" y1="90" x2="110" y2="90" stroke="#8B3A3A" strokeWidth="0.5" opacity="0.5" />
         <line x1="10" y1="120" x2="110" y2="120" stroke="#8B3A3A" strokeWidth="0.5" opacity="0.5" />
-        {/* Center kanji 蠕｡邀､ */}
         <text x="60" y="100" textAnchor="middle" fill="#C9A95A" fontSize="22" fontFamily="Noto Serif JP, serif" fontWeight="700">
           蠕｡
         </text>
         <text x="60" y="125" textAnchor="middle" fill="#C9A95A" fontSize="22" fontFamily="Noto Serif JP, serif" fontWeight="700">
           邀､
         </text>
-        {/* Sticks peeking out */}
         {[46, 54, 62, 70, 74].map((x, i) => (
           <rect
             key={i}
@@ -116,7 +111,6 @@ function FortuneScroll({ fortune, visible }: { fortune: Fortune | null; visible:
         overflow: "hidden",
       }}
     >
-      {/* Top roll */}
       <div
         style={{
           height: 24,
@@ -124,10 +118,7 @@ function FortuneScroll({ fortune, visible }: { fortune: Fortune | null; visible:
           borderRadius: "4px 4px 0 0",
         }}
       />
-
-      {/* Scroll content */}
       <div style={{ padding: "28px 32px 32px", background: "linear-gradient(180deg, #F5E6C8 0%, #EDD9A3 100%)" }}>
-        {/* Decorative top border */}
         <div
           style={{
             borderBottom: "2px solid rgba(139,58,58,0.3)",
@@ -148,8 +139,6 @@ function FortuneScroll({ fortune, visible }: { fortune: Fortune | null; visible:
             蠕｡逾樒ｱ､ ﾂｷ Omikuji
           </span>
         </div>
-
-        {/* Main kanji */}
         <div className="text-center" style={{ marginBottom: 8 }}>
           <span
             style={{
@@ -165,8 +154,6 @@ function FortuneScroll({ fortune, visible }: { fortune: Fortune | null; visible:
             {fortune.kanji}
           </span>
         </div>
-
-        {/* Japanese result */}
         <div className="text-center" style={{ marginBottom: 6 }}>
           <span
             style={{
@@ -180,8 +167,6 @@ function FortuneScroll({ fortune, visible }: { fortune: Fortune | null; visible:
             {fortune.japanese}
           </span>
         </div>
-
-        {/* English result */}
         <div className="text-center" style={{ marginBottom: 20 }}>
           <span
             style={{
@@ -195,8 +180,6 @@ function FortuneScroll({ fortune, visible }: { fortune: Fortune | null; visible:
             {fortune.raw}
           </span>
         </div>
-
-        {/* Divider */}
         <div
           style={{
             borderTop: "1px solid rgba(139,58,58,0.2)",
@@ -218,14 +201,10 @@ function FortuneScroll({ fortune, visible }: { fortune: Fortune | null; visible:
             {fortune.description}
           </p>
         </div>
-
-        {/* Bottom decoration */}
         <div className="text-center">
           <span style={{ color: "#C1292E", fontSize: 20, letterSpacing: "0.3em" }}>笶� 笶� 笶�</span>
         </div>
       </div>
-
-      {/* Bottom roll */}
       <div
         style={{
           height: 24,
@@ -282,7 +261,9 @@ export default function OmikujiPage() {
         abi: OMIKUJI_ABI,
         functionName: "draw",
         value: PRICE,
-        dataSuffix: "0x62635f703336686733377400802180218021802180218021802180210000000000000000" as `0x${string}`,
+        dataSuffix: Attribution.toDataSuffix({
+          codes: ["bc_p36hg37t"],
+        }) as `0x${string}`,
       });
 
       setTxHash(hash);
@@ -353,14 +334,11 @@ export default function OmikujiPage() {
           "radial-gradient(ellipse 120% 80% at 50% 0%, #1e0a2e 0%, #0d0818 40%, #0a0613 100%)",
       }}
     >
-      {/* Sakura petals */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {Array.from({ length: SAKURA_COUNT }, (_, i) => (
           <SakuraPetal key={i} index={i} />
         ))}
       </div>
-
-      {/* Subtle grid overlay */}
       <div
         className="absolute inset-0 pointer-events-none opacity-5"
         style={{
@@ -369,14 +347,10 @@ export default function OmikujiPage() {
           backgroundSize: "60px 60px",
         }}
       />
-
-      {/* Top lantern decoration */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
         style={{ width: 2, height: 80, background: "linear-gradient(180deg, #C1292E 0%, transparent 100%)" }}
       />
-
-      {/* Header */}
       <div className="relative z-10 text-center mb-6 px-4">
         <div style={{ marginBottom: 4 }}>
           <span
@@ -417,9 +391,7 @@ export default function OmikujiPage() {
         </p>
       </div>
 
-      {/* Main content */}
       <div className="relative z-10 flex flex-col items-center gap-6 px-4 w-full max-w-md">
-        {/* Omikuji box */}
         {!isDone && (
           <div
             style={{
@@ -431,12 +403,10 @@ export default function OmikujiPage() {
           </div>
         )}
 
-        {/* Fortune scroll */}
         {(phase === "revealing" || isDone) && fortune && (
           <FortuneScroll fortune={fortune} visible={true} />
         )}
 
-        {/* Status text */}
         {isLoading && (
           <div className="text-center">
             <div
@@ -478,7 +448,6 @@ export default function OmikujiPage() {
           </div>
         )}
 
-        {/* Error */}
         {error && (
           <div
             style={{
@@ -496,7 +465,6 @@ export default function OmikujiPage() {
           </div>
         )}
 
-        {/* Action buttons */}
         {!isConnected && phase !== "connecting" && (
           <button
             onClick={handleConnect}
@@ -598,7 +566,6 @@ export default function OmikujiPage() {
           </div>
         )}
 
-        {/* Fortune display labels */}
         {phase === "idle" && isConnected && (
           <div className="flex flex-wrap justify-center gap-2 mt-2">
             {Object.entries(FORTUNE_DATA).map(([key, val]) => (
@@ -619,7 +586,6 @@ export default function OmikujiPage() {
           </div>
         )}
 
-        {/* Contract info */}
         <p
           style={{
             fontSize: 10,
@@ -634,4 +600,4 @@ export default function OmikujiPage() {
       </div>
     </div>
   );
-            }
+}
