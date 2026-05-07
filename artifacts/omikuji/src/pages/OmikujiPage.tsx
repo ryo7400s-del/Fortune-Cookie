@@ -362,7 +362,7 @@ export default function OmikujiPage() {
               textTransform: "uppercase",
             }}
           >
-            Blockchain Fortune ﾂｷ 0.00002 ETH
+            Blockchain Fortune 0.00002 ETH
           </span>
         </div>
         <h1
