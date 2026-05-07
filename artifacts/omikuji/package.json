@@ -77,6 +77,6 @@
   "dependencies": {
     "viem": "^2.48.8",
     "wagmi": "^3.6.9",
-    "@farcaster/miniapp-sdk": "^0.0.1"
+    "@farcaster/miniapp-sdk": "^0.3.0"
   }
 }
