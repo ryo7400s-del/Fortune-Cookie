@@ -136,7 +136,7 @@ function FortuneScroll({ fortune, visible }: { fortune: Fortune | null; visible:
               textTransform: "uppercase",
             }}
           >
-            蠕｡逾樒ｱ､ ﾂｷ Omikuji
+            御神籤 Omikuji
           </span>
         </div>
         <div className="text-center" style={{ marginBottom: 8 }}>
