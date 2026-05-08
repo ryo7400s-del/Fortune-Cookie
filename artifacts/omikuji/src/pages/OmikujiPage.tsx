@@ -247,6 +247,14 @@ export default function OmikujiPage() {
 
   const handleDraw = async () => {
     if (!isConnected || !publicClient) return;
+    if (chainId !== base.id) {
+  try {
+    await switchChain({ chainId: base.id });
+  } catch {
+    setError("Please switch to Base network.");
+    return;
+  }
+    }
     setError(null);
     setFortune(null);
     setTxHash(null);
