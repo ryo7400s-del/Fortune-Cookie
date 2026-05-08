@@ -11,6 +11,7 @@ import {
 import { parseEventLogs, formatEther } from "viem";
 import { injected } from "wagmi/connectors";
 import { Attribution } from "ox/erc8021";
+import { base } from "wagmi/chains";
 import {
   CONTRACT_ADDRESS,
   OMIKUJI_ABI,
