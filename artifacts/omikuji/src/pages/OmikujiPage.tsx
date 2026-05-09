@@ -446,7 +446,7 @@ export default function OmikujiPage() {
                   color: "rgba(245,230,200,0.7)",
                 }}
               >
-                Consulting the oracle窶ｦ
+                Consulting the oracle
               </span>
             </div>
             {txHash && (
