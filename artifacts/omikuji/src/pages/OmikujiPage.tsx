@@ -329,7 +329,7 @@ export default function OmikujiPage() {
 
   const priceEth = formatEther(PRICE);
   const shortAddress = address
-    ? `${address.slice(0, 6)}窶ｦ${address.slice(-4)}`
+    ? `${address.slice(0, 6)}${address.slice(-4)}`
     : "";
 
   const isLoading = phase === "waiting";
