@@ -451,7 +451,7 @@ export default function OmikujiPage() {
             </div>
             {txHash && (
               <p style={{ fontSize: 11, color: "rgba(245,230,200,0.3)", marginTop: 8, wordBreak: "break-all" }}>
-                tx: {txHash.slice(0, 20)}窶ｦ
+                tx: {txHash.slice(0, 20)}
               </p>
             )}
           </div>
