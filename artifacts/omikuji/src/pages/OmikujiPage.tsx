@@ -604,7 +604,7 @@ export default function OmikujiPage() {
             marginTop: 8,
           }}
         >
-          Contract · {CONTRACT_ADDRESS.slice(0, 10)}窶ｦ{CONTRACT_ADDRESS.slice(-8)}
+          Contract · {CONTRACT_ADDRESS.slice(0, 10)}{CONTRACT_ADDRESS.slice(-8)}
         </p>
       </div>
     </div>
